@@ -64,12 +64,24 @@
 
     <?php
 //1.  DB接続します
+// try {
+//   $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
+// } catch (PDOException $e) {
+//   exit('DB_CONNECT:'.$e->getMessage());
+// }
+
 try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
-} catch (PDOException $e) {
-  exit('DB_CONNECT:'.$e->getMessage());
-}
+    $db_name = 'forest-people_gs_db';
+    $db_host = 'mysql3101.db.sakura.ne.jp';
+    $db_id = '*****';
+    $db_pw = '*****';
+    //Password:MAMP='root',XAMPP=''
+    // $server_info = 'mysql:dbname='.$db_name.';charset=utf8;host='.$db_host;
+    $server_info = 'mysql:dbname='.$db_name.';charset=utf8;host='.$db_host.';port=3306';
+    $pdo = new PDO($server_info, $db_id, $db_pw);
+  } catch (PDOException $e) {
+    exit('DB_CONNECT:'.$e->getMessage());
+  }
 
 // フォームから選択されたカテゴリー、表示順を取得
 $selectedCategory = isset($_POST['selectCategory']) ? $_POST['selectCategory'] : 'すべて；';
